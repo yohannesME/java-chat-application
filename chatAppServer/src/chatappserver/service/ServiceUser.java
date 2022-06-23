@@ -5,6 +5,7 @@ import chatappserver.connection.DatabaseConnection;
 import chatappserver.model.Model_Alert;
 import chatappserver.model.Model_Client;
 import chatappserver.model.Model_Login;
+import chatappserver.model.Model_Saved_Message;
 import chatappserver.model.Model_Send_Message;
 import chatappserver.model.Model_User_Account;
 import java.sql.Connection;
@@ -116,27 +117,49 @@ public class ServiceUser {
     
     public void message(Model_Send_Message data){
         try{
-        ArrayList<Model_Send_Message> messageList;
+        ArrayList<Model_Saved_Message> messageFromList = new ArrayList<>();
         PreparedStatement p = con.prepareStatement(GET_MESSAGE);
         p.setInt(1, data.getFromUserID());
         ResultSet r = p.executeQuery();
         while(r.next()){
             if(r.getObject(1) != null)
-                messageList = (ArrayList<Model_Send_Message>) r.getObject(1);
+                messageFromList = (ArrayList<Model_Saved_Message>) r.getObject(1);
             else
-                messageList = new ArrayList<Model_Send_Message>();
+                messageFromList = new ArrayList<Model_Saved_Message>();
         }   
         r.close();
+        
+        ArrayList<Model_Saved_Message> messageToList = new ArrayList<>();
+        
         p.setInt(1, data.getFromUserID());
         r = p.executeQuery();
         while(r.next()){
             if(r.getObject(1) != null)
-                messageList = (ArrayList<Model_Send_Message>) r.getObject(1);
+                messageToList = (ArrayList<Model_Saved_Message>) r.getObject(1);
             else
-                messageList = new ArrayList<Model_Send_Message>();
+                messageToList = new ArrayList<Model_Saved_Message>();
         }   
         r.close();
         p.close();
+        
+        
+        messageFromList.add(new Model_Saved_Message(data.getText(), true));
+        messageToList.add(new Model_Saved_Message(data.getText(), false));
+        
+        p = con.prepareStatement(SET_MESSAGE);
+        p.setInt(1, Model_Saved_Message.toJsonObject(messageFromList));
+        r = p.executeQuery();
+        while(r.next()){
+            if(r.getObject(1) != null)
+                messageFromList = (ArrayList<Model_Saved_Message>) r.getObject(1);
+            else
+                messageFromList = new ArrayList<Model_Saved_Message>();
+        }   
+        r.close();
+        
+        
+        
+        
         
             
         }catch(SQLException e){
@@ -147,6 +170,7 @@ public class ServiceUser {
 
     //  SQL
     private final String GET_MESSAGE = "SELECT Message FROM user WHERE UserID=?";
+    private final String SET_MESSAGE = "UPDATE user SET Message=?";
     private final String LOGIN = "select UserID, UserName, Email, Name from `user` where `user`.UserName=BINARY(?) and `user`.`Password`=BINARY(?)";
     private final String SELECT_USER_ACCOUNT = "select UserID, UserName, Email, Name from user where UserID<>?";
     private final String INSERT_USER = "insert into user (UserName, `Password`, `Name`, `Email`) values (?,?,?,?)";

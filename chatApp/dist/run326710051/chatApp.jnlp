@@ -8,7 +8,7 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="chatApp.jar" size="620354" download="eager" />
+    <jar href="chatApp.jar" size="620363" download="eager" />
     <jar href="lib\engine.io-client-1.0.1.jar" size="106086" download="eager" />
     <jar href="lib\json-20090211.jar" size="45944" download="eager" />
     <jar href="lib\okhttp-3.12.12.jar" size="427674" download="eager" />

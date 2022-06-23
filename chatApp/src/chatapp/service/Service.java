@@ -17,7 +17,7 @@ public class Service {
     private static Service instance;
     private Socket client;
     private final int PORT_NUMBER = 9999;
-    private final String IP = "192.168.43.89";
+    private final String IP = "localhost";
     private Model_User_Account user;
 
 

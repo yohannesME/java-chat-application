@@ -13,7 +13,6 @@ import com.corundumstudio.socketio.SocketIOClient;
 import com.corundumstudio.socketio.SocketIOServer;
 import com.corundumstudio.socketio.listener.ConnectListener;
 import com.corundumstudio.socketio.listener.DataListener;
-import com.corundumstudio.socketio.listener.DisconnectListener;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -48,7 +47,7 @@ public class Service {
         server.addConnectListener(new ConnectListener() {
             @Override
             public void onConnect(SocketIOClient sioc) {
-                textArea.setText(textArea.getText() + "\nOne client connected\n");
+                textArea.setText(textArea.getText() + "\nclient connected\n");
             }
         });
         server.addEventListener("register", Model_User_Account.class, new DataListener<Model_User_Account>() {
@@ -98,28 +97,10 @@ public class Service {
             }
         });
         
-//        server.addDisconnectListener(new DisconnectListener() {
-//            @Override
-//            public void onDisconnect(SocketIOClient sioc) {
-//                int userID = removeClient(sioc);
-//                if (userID != 0) {
-//                    //  removed
-//                    userDisconnect(userID);
-//                }
-//            }
-//        });
-
         server.start();
         textArea.setText(textArea.getText() + "Server has Start on port : " + PORT_NUMBER + "\n");
     }
 
-//    private void userConnect(int userID) {
-//        server.getBroadcastOperations().sendEvent("user_status", userID, true);
-//    }
-//
-//    private void userDisconnect(int userID) {
-//        server.getBroadcastOperations().sendEvent("user_status", userID, false);
-//    }
 
     private void addClient(SocketIOClient client, Model_User_Account data) {
         listClient.add(new Model_Client(client, data ));
@@ -136,8 +117,6 @@ public class Service {
             }
         }      
     }
-    
-
     
 
     public int removeClient(SocketIOClient client) {
