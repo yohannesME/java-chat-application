@@ -5,13 +5,10 @@
  */
 package chatapp.main;
 
-import chatapp.event.EventChat;
 import chatapp.event.EventMain;
 import chatapp.event.PublicEvent;
 import chatapp.service.Service;
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 

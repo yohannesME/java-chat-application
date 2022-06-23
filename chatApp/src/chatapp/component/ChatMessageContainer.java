@@ -5,10 +5,6 @@
  */
 package chatapp.component;
 
-import chatapp.event.EventMenuLeft;
-import chatapp.event.PublicEvent;
-import chatapp.model.Model_User_Account;
-import java.util.List;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.VBox;
 

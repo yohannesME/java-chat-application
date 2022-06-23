@@ -21,6 +21,7 @@ import static javafx.scene.layout.Region.USE_PREF_SIZE;
 import javafx.scene.layout.VBox;
 import chatapp.model.Model_Login;
 import chatapp.event.RegisterEvent;
+import chatapp.main.RegisterGUI;
 
 /**
  *
@@ -148,7 +149,8 @@ public class AuthenticationGUI extends BorderPane{
                                 }
                             });
                         }
-                    }
+                                   
+            }
                 });                
             }
 

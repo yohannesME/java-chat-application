@@ -8,7 +8,6 @@ package chatapp.component;
 import chatapp.event.PublicEvent;
 import chatapp.model.Model_User_Account;
 import javafx.event.EventHandler;
-import javafx.event.EventType;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;

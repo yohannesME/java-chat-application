@@ -129,6 +129,18 @@ public class Login extends VBox {
             }
             
         });
+        password.setOnAction((event)->{
+            String user = username.getText();
+            String pass = password.getText();
+            if(user.equals("")){
+                username.requestFocus();
+            }else if(pass.equals("")){
+                password.requestFocus();
+            }else{
+                PublicEvent.getInstance().getRegisterEvent().login(new Model_Login(user, pass));
+            }
+            
+        });
         
         
         PublicEvent.getInstance().addLoginAlert(new LoginAlert(){

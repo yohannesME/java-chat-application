@@ -6,8 +6,6 @@
 package chatapp.component;
 
 import chatapp.event.PublicEvent;
-import chatapp.model.Model_Send_Message;
-import chatapp.service.Service;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;

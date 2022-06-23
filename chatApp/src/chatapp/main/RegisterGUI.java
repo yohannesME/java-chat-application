@@ -4,6 +4,8 @@ import chatapp.event.EventAlert;
 import chatapp.event.PublicEvent;
 import chatapp.model.Model_Alert;
 import chatapp.model.Model_User_Account;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
@@ -177,19 +179,47 @@ public class RegisterGUI extends VBox {
         
         if (username.equals("")) {
             userName.requestFocus();
+            lbError.setText("Please Insert Your UserName");
         } 
-        else if (Name.equals("")) {
+        if (Name.equals("")) {
             name.requestFocus();
+            lbError.setText("Please Insert Your Name");
         } 
-        else if (Email.equals("")) {
+        else {
+            Pattern namePattern = Pattern.compile("[a-zA-Z]*[ ][a-zA-Z]*");
+            Matcher nameMatch = namePattern.matcher(name.getText());
+            if (!nameMatch.matches()){
+                name.requestFocus();
+                lbError.setText("There Must be a space Between FirstName and LastName");
+            }
+        }
+        
+        if (Email.equals("")) {
             email.requestFocus();
-        } 
-        else if (pass.equals("")) {
+            lbError.setText("Email Is Required");
+        }
+        else {
+            Pattern emailPattern = Pattern.compile("[a-zA-Z0-9][a-zA-Z0-9._]*@[a-zA-Z0-9]+([.][a-zA-z]+)+");
+            Matcher emailMatch = emailPattern.matcher(email.getText());
+            if(!(emailMatch.find() && emailMatch.group().equals(email.getText()))){
+            email.requestFocus();
+            lbError.setText("Invalid Email Format");
+            }
+        }
+        
+        if (pass.equals("")) {
             password.requestFocus();
-        } 
-        else if (!pass.equals(confirmpassword)) {
+            lbError.setText("Password Is Required");            
+        } else if (!pass.equals(confirmpassword)) {
                 comfirmPassword.requestFocus();
+                lbError.setText("Password Does Not Match");
         } else {
+//            Pattern passPattern = Pattern.compile("((?=.*\\\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a#$%]).{8,15})");
+//            Matcher passMatch = passPattern.matcher(password.getText());
+            
+            if (password.getText().length() < 8){
+                lbError.setText("Password Must have a Length Of 8 And a Combination Of Digits, LowerCase, UpperCase and Special Characters");
+            }
             Model_User_Account data = new Model_User_Account(username, pass, Name, Email);
             PublicEvent.getInstance().getRegisterEvent().register(data, new EventAlert() {
                 @Override

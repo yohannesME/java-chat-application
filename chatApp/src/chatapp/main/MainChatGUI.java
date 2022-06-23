@@ -4,16 +4,7 @@ package chatapp.main;
 
 import chatapp.component.*;
 import chatapp.event.*;
-import chatapp.model.Model_Send_Message;
-import chatapp.service.Service;
-import javafx.application.Platform;
-import javafx.geometry.Insets;
-import javafx.scene.control.*;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
-import javafx.scene.shape.Circle;
-import javafx.scene.text.*;
 
 
 public  class MainChatGUI extends BorderPane {
