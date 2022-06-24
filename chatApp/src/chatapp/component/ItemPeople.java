@@ -8,7 +8,6 @@ package chatapp.component;
 import chatapp.event.PublicEvent;
 import chatapp.model.Model_User_Account;
 import javafx.event.EventHandler;
-import javafx.event.EventType;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -31,18 +30,12 @@ public class ItemPeople extends HBox{
     protected final ImageView profilePictureIcon;
     protected final VBox textContainer;
     protected final Label chatterName;
-    protected final Label chatLastMessage;
     protected final Pane pane2;
     protected final Circle circle;
     protected final Label unreadMessageNumber;
     //------------------------------
     
-//    public static ItemPeople getInstance(){
-//        if(instance==null)
-//            return new ItemPeople();
-//        return instance;
-//    }
-    
+
     Model_User_Account user;
 
     public Model_User_Account getUser() {
@@ -61,7 +54,6 @@ public class ItemPeople extends HBox{
         profilePictureIcon = new ImageView();
         textContainer = new VBox();
         chatterName = new Label();
-        chatLastMessage = new Label();
         pane2 = new Pane();
         circle = new Circle();
         unreadMessageNumber = new Label();
@@ -70,7 +62,7 @@ public class ItemPeople extends HBox{
 
         setAlignment(javafx.geometry.Pos.CENTER_LEFT);
         setId("currentChat");
-        setPrefHeight(100.0);
+        setPrefHeight(50.0);
         setPrefWidth(200.0);
         setPadding(new Insets(3, 5, 3, 5));
 
@@ -92,13 +84,6 @@ public class ItemPeople extends HBox{
         chatterName.setTextFill(javafx.scene.paint.Color.WHITE);
         chatterName.setFont(new Font("Ebrima Bold", 20.0));
 
-        chatLastMessage.setPrefHeight(26.0);
-        chatLastMessage.setPrefWidth(281.0);
-        chatLastMessage.setText("you: ok!");
-        chatLastMessage.setPadding(new Insets(0,0,0,10));
-        chatLastMessage.setTextFill(javafx.scene.paint.Color.valueOf("#9da7a7"));
-        chatLastMessage.setFont(new Font("Ebrima", 15.0));
-        textContainer.setOpaqueInsets(new Insets(5,2,2,5));
         HBox.setMargin(textContainer, new Insets(0.0));
 
         pane2.setPrefHeight(70.0);
@@ -119,7 +104,6 @@ public class ItemPeople extends HBox{
         
         getChildren().add(profilePictureIcon);
         textContainer.getChildren().add(chatterName);
-        textContainer.getChildren().add(chatLastMessage);
         getChildren().add(textContainer);
         pane2.getChildren().add(circle);
         pane2.getChildren().add(unreadMessageNumber);
@@ -140,13 +124,13 @@ public class ItemPeople extends HBox{
             @Override
             public void handle(MouseEvent event) {
 //                mouse = false;
-                setStyle("-fx-color: rgb(5, 19, 97);");        
+                setStyle("-fx-background-color: transparent;");        
             }
 
         });
         setOnMouseEntered((evt)->{
 //            mouse = true;
-            setStyle("-fx-color: rgb(50, 19, 97);");        
+            setStyle("-fx-background-color: #242F3D;");        
         });
 
     }

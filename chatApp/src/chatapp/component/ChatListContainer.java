@@ -12,19 +12,16 @@ import javafx.scene.layout.VBox;
 
 public class ChatListContainer extends  VBox{
 
-    SearchBarContainer searchBarContainer;
     ScrollPane spChats;
 
     public ChatListContainer() {
         
         spChats = new ScrollPane();
         
-        searchBarContainer = new SearchBarContainer();
-        
         setId("searchAndChatList");
         setPrefHeight(702.0);
         setPrefWidth(326.0);
-        getChildren().add(searchBarContainer); 
+
         
         heightProperty().addListener((observable, oldValue, newValue)->{
             spChats.setVvalue((Double)newValue);
@@ -50,15 +47,6 @@ public class ChatListContainer extends  VBox{
                 }
             }
 
-            @Override
-            public void userConnect(int userID) {
-                //when user connect
-            }
-
-            @Override
-            public void userDisconnect(int userID) {
-                //when user disconnect
-            }
         });
     }
 

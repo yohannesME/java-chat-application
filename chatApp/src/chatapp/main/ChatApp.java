@@ -5,15 +5,15 @@
  */
 package chatapp.main;
 
-import chatapp.event.EventChat;
 import chatapp.event.EventMain;
 import chatapp.event.PublicEvent;
 import chatapp.service.Service;
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
+import javafx.application.Platform;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 /**
  *
@@ -42,6 +42,15 @@ public class ChatApp extends Application {
         
         stage.setScene(scene);
         stage.show();
+        
+        stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+            @Override
+            public void handle(WindowEvent t) {
+                Platform.exit();
+                System.exit(0);
+            }
+        });
+        
     }
 
     public static void main(String[] args) {

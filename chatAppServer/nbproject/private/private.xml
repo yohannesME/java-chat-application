@@ -4,10 +4,23 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group name="Group 20220601-10:57:46"/>
         <group>
+<<<<<<< HEAD
             <file>file:/D:/java/java-chat-application/chatAppServer/src/chatappserver/model/Model_Saved_Message.java</file>
             <file>file:/D:/java/java-chat-application/chatAppServer/src/chatappserver/model/Model_User_Account.java</file>
             <file>file:/D:/java/java-chat-application/chatAppServer/src/chatappserver/service/Service.java</file>
             <file>file:/D:/java/java-chat-application/chatAppServer/src/chatappserver/service/ServiceUser.java</file>
+=======
+            <file>file:/C:/Users/hp/Documents/NetBeansProjects/java-chat-application/chatAppServer/src/chatappserver/service/Service.java</file>
+            <file>file:/C:/Users/hp/Documents/NetBeansProjects/java-chat-application/chatAppServer/src/chatappserver/connection/DatabaseConnection.java</file>
+            <file>file:/C:/Users/hp/Documents/NetBeansProjects/java-chat-application/chatAppServer/src/chatappserver/model/Model_User_Account.java</file>
+            <file>file:/C:/Users/hp/Documents/NetBeansProjects/java-chat-application/chatAppServer/src/chatappserver/model/Model_Receive_Message.java</file>
+            <file>file:/C:/Users/hp/Documents/NetBeansProjects/java-chat-application/chatAppServer/src/chatappserver/main/ChatAppServer.java</file>
+            <file>file:/C:/Users/hp/Documents/NetBeansProjects/java-chat-application/chatAppServer/src/chatappserver/model/Model_Send_Message.java</file>
+            <file>file:/C:/Users/hp/Documents/NetBeansProjects/java-chat-application/chatAppServer/src/chatappserver/service/ServiceUser.java</file>
+            <file>file:/C:/Users/hp/Documents/NetBeansProjects/java-chat-application/chatAppServer/src/chatappserver/model/Model_Alert.java</file>
+            <file>file:/C:/Users/hp/Documents/NetBeansProjects/java-chat-application/chatAppServer/src/chatappserver/model/Model_Client.java</file>
+            <file>file:/C:/Users/hp/Documents/NetBeansProjects/java-chat-application/chatAppServer/src/chatappserver/model/Model_Login.java</file>
+>>>>>>> 499b2a2c42e3419b146d5cf3d6841ba217351bc1
         </group>
     </open-files>
 </project-private>

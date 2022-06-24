@@ -12,12 +12,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Application;
 import javafx.application.Platform;
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
-import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
@@ -68,6 +66,16 @@ public class ChatAppServer extends Application {
         primaryStage.setTitle("Server");
         primaryStage.setScene(scene);
         primaryStage.show();
+        
+        primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+            @Override
+            public void handle(WindowEvent t) {
+                Platform.exit();
+                System.exit(0);
+            }
+        });        
+        
+        
     }
     
     
@@ -81,9 +89,7 @@ public class ChatAppServer extends Application {
         }
     }
 
-    /**
-     * @param args the command line arguments
-     */
+
     public static void main(String[] args) {
         launch(args);
     }

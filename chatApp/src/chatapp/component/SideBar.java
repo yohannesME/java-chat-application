@@ -1,27 +1,24 @@
 package chatapp.component;
 
 import javafx.application.Platform;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.stage.WindowEvent;
 
 public class SideBar extends VBox {
     protected final Pane pane;
     protected final ImageView chatListBtn;
-//    protected final ImageView groupChatBtn;
-//    protected final ImageView profileBtn;
-//    protected final ImageView settingBtn;
+
     protected final ImageView logoutBtn;
     protected final Pane pane0;    
 
     public SideBar() {       
         pane = new Pane();
         chatListBtn = new ImageView();
-//        groupChatBtn = new ImageView();
-//        profileBtn = new ImageView();
-//        settingBtn = new ImageView();
         pane0 = new Pane();
         logoutBtn = new ImageView();
 
@@ -44,30 +41,6 @@ public class SideBar extends VBox {
         chatListBtn.setImage(new Image(getClass().getResource("/images/icons8-chatting-91.png").toExternalForm()));
         VBox.setMargin(chatListBtn, new Insets(20.0, 0.0, 0.0, 0.0));
 
-//        groupChatBtn.setFitHeight(48.0);
-//        groupChatBtn.setFitWidth(38.0);
-//        groupChatBtn.setNodeOrientation(javafx.geometry.NodeOrientation.INHERIT);
-//        groupChatBtn.setPickOnBounds(true);
-//        groupChatBtn.setPreserveRatio(true);
-//        groupChatBtn.setImage(new Image(getClass().getResource("/images/icons8-user-groups-50.png").toExternalForm()));
-//        VBox.setMargin(groupChatBtn, new Insets(30.0, 0.0, 0.0, 0.0));
-//
-//        profileBtn.setFitHeight(48.0);
-//        profileBtn.setFitWidth(38.0);
-//        profileBtn.setNodeOrientation(javafx.geometry.NodeOrientation.INHERIT);
-//        profileBtn.setPickOnBounds(true);
-//        profileBtn.setPreserveRatio(true);
-//        profileBtn.setImage(new Image(getClass().getResource("/images/icons8-account-24.png").toExternalForm()));
-//        VBox.setMargin(profileBtn, new Insets(30.0, 0.0, 0.0, 0.0));
-//
-//        settingBtn.setFitHeight(48.0);
-//        settingBtn.setFitWidth(38.0);
-//        settingBtn.setNodeOrientation(javafx.geometry.NodeOrientation.INHERIT);
-//        settingBtn.setPickOnBounds(true);
-//        settingBtn.setPreserveRatio(true);
-//        settingBtn.setImage(new Image(getClass().getResource("/images/icons8-settings-50.png").toExternalForm()));
-//        VBox.setMargin(settingBtn, new Insets(30.0, 0.0, 0.0, 0.0));
-
         VBox.setVgrow(pane0, javafx.scene.layout.Priority.ALWAYS);
         pane0.setPrefHeight(200.0);
         pane0.setPrefWidth(200.0);
@@ -83,9 +56,6 @@ public class SideBar extends VBox {
 
         getChildren().add(pane);
         getChildren().add(chatListBtn);
-//        getChildren().add(groupChatBtn);
-//        getChildren().add(profileBtn);
-//        getChildren().add(settingBtn);
         getChildren().add(pane0);
         getChildren().add(logoutBtn);  
         
@@ -97,21 +67,15 @@ public class SideBar extends VBox {
     });
     
     logoutBtn.setOnMouseClicked(event->{
-        Platform.exit();
+        logoutBtn.getScene().getWindow().setOnCloseRequest(new EventHandler<WindowEvent>() {
+            @Override
+            public void handle(WindowEvent t) {
+                Platform.exit();
+                System.exit(0);
+            }
+        });
     });
-//    groupChatBtn.setOnMouseClicked(event->{
-//        menuBarOption(groupChatBtn);
-//    });
-//    profileBtn.setOnMouseClicked(event->{
-//        menuBarOption(profileBtn);
-//    });
-//    logoutBtn.setOnMouseClicked(event->{
-//        menuBarOption(logoutBtn);
-//    });
-//    settingBtn.setOnMouseClicked(event->{
-//        menuBarOption(settingBtn);
-//    });
-    
+
     }
 
     public void menuBarOption(ImageView btn){
@@ -120,21 +84,6 @@ public class SideBar extends VBox {
         }else{
             chatListBtn.setOpacity(0.2);
         }
-//        if(groupChatBtn == btn){
-//            groupChatBtn.setOpacity(1);
-//        }else{
-//            groupChatBtn.setOpacity(0.2);
-//        }
-//        if(profileBtn == btn){
-//            profileBtn.setOpacity(1);
-//        }else{
-//            profileBtn.setOpacity(0.2);
-//        }
-//        if(settingBtn == btn){
-//            settingBtn.setOpacity(1);
-//        }else{
-//            settingBtn.setOpacity(0.2);
-//        }
     }
     
 }
