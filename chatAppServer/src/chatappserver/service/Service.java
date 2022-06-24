@@ -71,7 +71,6 @@ public class Service {
                 if (login != null) {
                     ar.sendAckData(true, login);
                     addClient(sioc, login);
-//                    userConnect(login.getUserID());
                 } else {
                     ar.sendAckData(false);
                 }
@@ -90,6 +89,14 @@ public class Service {
             }
         });
         
+        server.addEventListener("load_message", Integer.class, new DataListener<Integer>() {
+            @Override
+            public void onData(SocketIOClient sioc, Integer userID, AckRequest ar) throws Exception {
+                List<Model_Send_Message> msgList = serviceUser.getMessage(userID);
+                sioc.sendEvent("load_message", msgList.toArray());
+            }
+        });
+        
         server.addEventListener("send_to_user", Model_Send_Message.class, new DataListener<Model_Send_Message>() {
             @Override
             public void onData(SocketIOClient sioc, Model_Send_Message t, AckRequest ar) throws Exception {
@@ -100,7 +107,8 @@ public class Service {
         server.start();
         textArea.setText(textArea.getText() + "Server has Start on port : " + PORT_NUMBER + "\n");
     }
-
+    
+   
 
     private void addClient(SocketIOClient client, Model_User_Account data) {
         listClient.add(new Model_Client(client, data ));
@@ -108,10 +116,16 @@ public class Service {
     }
 
     private void sendToClient(Model_Send_Message data){
-
+                new Thread(new Runnable(){
+                    @Override
+                    public void run() {
+                        serviceUser.message(data);
+                    }
+                }).start();
+                
+                
         for (Model_Client c : listClient) {
             if (c.getUser().getUserID() == data.getToUserID()) {
-                serviceUser.message(data);
                 c.getClient().sendEvent("receive_ms", new Model_Receive_Message(data.getFromUserID(), data.getText()));
                 break;
             }

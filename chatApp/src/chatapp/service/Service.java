@@ -2,6 +2,7 @@ package chatapp.service;
 
 import chatapp.event.PublicEvent;
 import chatapp.model.Model_Receive_Message;
+import chatapp.model.Model_Send_Message;
 import chatapp.model.Model_User_Account;
 import io.socket.client.IO;
 import io.socket.client.Socket;
@@ -55,21 +56,25 @@ public class Service {
                     });
                 }
             });    
-            
-            client.on("user_status", new Emitter.Listener() {
+            client.on("load_message", new Emitter.Listener() {
                 @Override
                 public void call(Object... os) {
-                    int userID = (Integer) os[0];
-                    boolean status = (Boolean) os[1];
-                    if (status) {
-                        //  connect
-                        PublicEvent.getInstance().getEventMenuLeft().userConnect(userID);
-                    } else {
-                        //  disconnect
-                        PublicEvent.getInstance().getEventMenuLeft().userDisconnect(userID);
+                    //  list user
+                    List<Model_Send_Message> messages = new ArrayList<>();
+                    for (Object o : os) {
+                        Model_Send_Message m = new Model_Send_Message(o);
+                        messages.add(m);
+                        
                     }
+                    Platform.runLater(new Runnable(){
+                        @Override
+                        public void run() {
+                            PublicEvent.getInstance().getEventChat().loadMessage(messages);
+                        }
+                    });
                 }
-            });
+            });    
+            
             
             client.on("receive_ms", new Emitter.Listener() {
                 @Override

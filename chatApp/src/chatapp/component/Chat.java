@@ -7,6 +7,7 @@ import chatapp.model.Model_Receive_Message;
 import chatapp.model.Model_Send_Message;
 import chatapp.model.Model_User_Account;
 import chatapp.service.Service;
+import java.util.List;
 import javafx.application.Platform;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
@@ -43,7 +44,7 @@ public class Chat extends VBox {
         getChildren().add(messageTypingContainer);
         
         widthProperty().addListener((observable, oldValue, newValue) -> {
-            chatMessageContainer.setPrefWidth((double)newValue-410);
+            chatMessageContainer.setPrefWidth((double)newValue-20);
     });   
         
         
@@ -64,7 +65,22 @@ public class Chat extends VBox {
             chatTile.setUser(user);
             chatMessageContainer.getChildren().removeAll(chatMessageContainer.getChildren());
             userTosend = user;
+            //add the text tile here
+            Service.getInstance().getClient().emit("load_message", Service.getInstance().getUser().getUserID());
         }
+
+            @Override
+            public void loadMessage(List<Model_Send_Message> message) {
+                for (Model_Send_Message m : message) {
+                    if(userTosend.getUserID() == m.getFromUserID()){
+                        addSentMessageLabel(m.getText());
+                    }else{
+                        ReceivedMessage msg = new ReceivedMessage(m.getText());
+                        chatMessageContainer.getChildren().add(msg);
+                        
+                    }
+                }
+            }
         
         
     });    
@@ -97,6 +113,6 @@ public class Chat extends VBox {
     }    
     
     private void send(Model_Send_Message data) {
-        Service.getInstance().getClient().emit("send_to_user", data.toJsonObject());
+            Service.getInstance().getClient().emit("send_to_user", data.toJsonObject());
     }
 } 
