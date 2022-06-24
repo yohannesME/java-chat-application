@@ -67,13 +67,8 @@ public class SideBar extends VBox {
     });
     
     logoutBtn.setOnMouseClicked(event->{
-        logoutBtn.getScene().getWindow().setOnCloseRequest(new EventHandler<WindowEvent>() {
-            @Override
-            public void handle(WindowEvent t) {
-                Platform.exit();
-                System.exit(0);
-            }
-        });
+        Platform.exit();
+        System.exit(0);
     });
 
     }
